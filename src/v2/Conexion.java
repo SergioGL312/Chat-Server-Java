@@ -16,9 +16,7 @@ public abstract class Conexion {
 	
 	protected Socket cSocket;
 	
-	protected DataOutputStream salidaServidor, salidaCliente;
-	
-//	private static Vector<Socket> clientes = new Vector<Socket>();
+	protected Vector<Socket> clientes = new Vector<Socket>();
 	
 	public Conexion(String tipo) throws IOException {
 		
@@ -30,9 +28,6 @@ public abstract class Conexion {
 			
 			cSocket = new Socket();
 			
-		} else {
-			
-			cSocket = new Socket(HOST, PORT);
 		}
 	}
 

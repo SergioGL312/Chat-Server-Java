@@ -11,18 +11,16 @@ public class Server extends Conexion {
 			try {
 	            
 				cSocket = sSocket.accept();
+				
+				clientes.add(cSocket);
 
 				DataInputStream entrada = new DataInputStream(cSocket.getInputStream());
 
-				salidaServidor = new DataOutputStream(cSocket.getOutputStream());
+				ChatClientHandler chat = new ChatClientHandler(cSocket, clientes);
 
-				msgServidor = entrada.readUTF();
-
-				System.out.println(msgServidor);
-
-				String res = "m^server@127.0.0.1^-^alguien entro al chat^";
-
-				salidaServidor.writeUTF(res);
+				Thread hilo = new Thread(chat);
+				
+				hilo.start();
 
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
